@@ -4,4 +4,4 @@ This is an automatic market with one token-pair (ERC20 BALLOONS ($BAL) and ETH),
 
 (amount of ETH in DEX ) * ( amount of tokens in DEX ) = k
 
-Trading fee according to UNISWAP = 0.3 %
+Trading fee = 0.3 %
