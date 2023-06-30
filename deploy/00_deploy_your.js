@@ -3,7 +3,7 @@ const {
   developmentChains,
   VERIFICATION_BLOCK_CONFIRMATIONS,
 } = require("../helper-hardhat-config")
-const { verify } = require("../utils/verify")
+
 
 module.exports=async({deployments,getNamedAccounts})=>{
     const{deploy}=deployments;
@@ -42,23 +42,7 @@ module.exports=async({deployments,getNamedAccounts})=>{
       console.log(
     "Approving DEX (" + dex.address + ") to take Balloons from main account..."
   );
-  // If you are going to the testnet make sure your deployer account has enough ETH
   await balloons.approve(dex.address, ethers.utils.parseEther("100"));
-
-
-  console.log("INIT exchange...");
-  await dex.init(ethers.utils.parseEther("1"), {
-    value: ethers.utils.parseEther("0.1"),
-    gasLimit: 200000,
-  });
-  
-  const arguments=[balloons.address];
-  if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
-    console.log("Verifying...")
-    await verify(dex.address, arguments);
-    // await verify(balloons.address,[]); // verified manually
-}
-
 }
 
 module.exports.tags=["Balloons","dex","all"];
